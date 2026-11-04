@@ -1,3 +1,5 @@
+#![no_std]
+
 pub mod event;
 pub mod key;
 pub mod error;
@@ -14,7 +16,7 @@ pub trait Window: Sized {
 
     fn set_title(&mut self, title: &str);
 
-    fn events(&mut self) -> Vec<WindowEvent>;
+    fn events(&mut self) -> impl Iterator<Item = WindowEvent>;
 
     fn is_open(&self) -> bool;
 

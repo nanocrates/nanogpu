@@ -1,0 +1,12 @@
+[package]
+name = "nanogpu_glfw"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+glfw = "0.63.0"
+nanogpu_window.workspace = true
+nanomath.workspace = true
+
+[lints]
+workspace = true

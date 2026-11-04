@@ -6,10 +6,10 @@ use nanomath::vector::Vec2u;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum WindowCreationError {
-    InitializeSubsystem(String),
-    CreateWindow(String),
+    InitializeSubsystem(&'static str),
+    CreateWindow(&'static str),
     InvalidDimensions(Vec2u),
-    InvalidTitle(String),
+    InvalidTitle(&'static str),
 }
 
 impl Display for WindowCreationError {

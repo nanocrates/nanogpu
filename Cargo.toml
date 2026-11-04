@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["."]
+members = [".", "src/nanogpu_glfw", "src/nanogpu_window"]
 
 [package]
 name = "nanogpu"
@@ -15,12 +15,17 @@ readme = "README.md"
 workspace = true
 
 [dependencies]
-glfw = { version = "0.63.0", default-features = false }
-wgpu = { version = "30.0.1", default-features = false }
-nanomath = { version = "0.1.0", path = "../nanomath" }
+nanogpu_window.workspace = true
+nanomath.workspace = true
+nanogpu_glfw.workspace = true
+
+[workspace.dependencies]
+nanomath = { path = "../nanomath" }
+nanogpu_window = { path = "src/nanogpu_window" }
+nanogpu_glfw = { path = "src/nanogpu_glfw" }
 
 [workspace.lints.rust]
-missing_docs = "warn"
+missing_docs = "allow"
 unused_doc_comments = "warn"
 invalid_doc_attributes = "warn"
 
