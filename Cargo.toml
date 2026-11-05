@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = [".", "src/nanogpu_glfw", "src/nanogpu_window"]
+members = [".", "src/nanogpu_glfw", "src/nanogpu_render", "src/nanogpu_surface", "src/nanogpu_wgpu", "src/nanogpu_window"]
 
 [package]
 name = "nanogpu"
@@ -19,21 +19,30 @@ workspace = true
 [dependencies]
 nanogpu_window = { workspace = true, optional = true }
 nanomath = { workspace = true, optional = true }
+nanogpu_surface = { workspace = true, optional = true }
+nanogpu_render = { workspace = true, optional = true }
 nanogpu_glfw = { workspace = true, optional = true }
+nanogpu_wgpu = { workspace = true, optional = true }
 
 [features]
 std = []
 math = ["dep:nanomath"]
+render = ["dep:nanogpu_render"]
 window = ["dep:nanogpu_window", "math"]
+surface = ["dep:nanogpu_surface", "window", "render"]
 glfw = ["dep:nanogpu_glfw", "window", "std"]
 glfw-x11 = ["glfw", "nanogpu_glfw/x11"]
 glfw-wayland = ["glfw", "nanogpu_glfw/wayland"]
+wgpu = ["dep:nanogpu_wgpu", "surface"]
 default = ["math", "window"]
 
 [workspace.dependencies]
 nanomath = { path = "../nanomath" }
 nanogpu_window = { path = "src/nanogpu_window" }
+nanogpu_surface = { path = "src/nanogpu_surface" }
+nanogpu_render = { path = "src/nanogpu_render" }
 nanogpu_glfw = { path = "src/nanogpu_glfw" }
+nanogpu_wgpu = { path = "src/nanogpu_wgpu" }
 
 [workspace.lints.rust]
 missing_docs = "warn"
