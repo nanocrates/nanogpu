@@ -2,11 +2,24 @@
 name = "nanogpu_glfw"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "GLFW windowing backend for Nanogpu"
+repository = "https://github.com/nanocrates/nanogpu"
+keywords = ["glfw", "nanogpu", "gpu", "window", "desktop"]
+categories = ["graphics", "rendering"]
+readme = "README.md"
 
 [dependencies]
-glfw = "0.63.0"
 nanogpu_window.workspace = true
 nanomath.workspace = true
+
+[dependencies.glfw]
+version = "0.63.0"
+default-features = false
+
+[features]
+x11 = ["glfw/x11"]
+wayland = ["glfw/wayland"]
 
 [lints]
 workspace = true

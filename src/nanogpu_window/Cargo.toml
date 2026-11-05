@@ -2,6 +2,12 @@
 name = "nanogpu_window"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "Traits and types for working with a window in Nanogpu"
+repository = "https://github.com/nanocrates/nanogpu"
+keywords = ["window", "nanogpu"]
+categories = ["graphics", "rendering", "no-std", ]
+readme = "README.md"
 
 [dependencies]
 nanomath.workspace = true

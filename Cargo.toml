@@ -10,14 +10,25 @@ license = "MIT"
 description = "A lightweight graphics library for GPU programming in Rust."
 repository = "https://github.com/nanocrates/nanogpu"
 readme = "README.md"
+keywords = ["gpu", "graphics", "window", "game", "draw"]
+categories = ["graphics", "rendering", "no-std"]
 
 [lints]
 workspace = true
 
 [dependencies]
-nanogpu_window.workspace = true
-nanomath.workspace = true
-nanogpu_glfw.workspace = true
+nanogpu_window = { workspace = true, optional = true }
+nanomath = { workspace = true, optional = true }
+nanogpu_glfw = { workspace = true, optional = true }
+
+[features]
+std = []
+math = ["dep:nanomath"]
+window = ["dep:nanogpu_window", "math"]
+glfw = ["dep:nanogpu_glfw", "window", "std"]
+glfw-x11 = ["glfw", "nanogpu_glfw/x11"]
+glfw-wayland = ["glfw", "nanogpu_glfw/wayland"]
+default = ["math", "window"]
 
 [workspace.dependencies]
 nanomath = { path = "../nanomath" }
@@ -25,7 +36,7 @@ nanogpu_window = { path = "src/nanogpu_window" }
 nanogpu_glfw = { path = "src/nanogpu_glfw" }
 
 [workspace.lints.rust]
-missing_docs = "allow"
+missing_docs = "warn"
 unused_doc_comments = "warn"
 invalid_doc_attributes = "warn"
 

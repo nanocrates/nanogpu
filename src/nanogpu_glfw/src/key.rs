@@ -1,6 +1,15 @@
+//! Utilities for keycode conversions between glfw and nanogpu Key types.
+
 use nanogpu_window::key::Key;
 
-pub fn glfw_key_to_key(glfw_key: glfw::Key) -> Option<Key> {
+/// Convert the given `glfw`-native keycode to the cross-backend nanogpu [`Key`] enum.
+/// This function just does a giant match for all the GLFW keys.
+///
+/// ## Returns
+/// - `Some(Key)`, containing the [`Key`] variant corresponding to the GLFW keycode.
+/// - `None` if the GLFW key was [`glfw::Key::Unknown`].
+#[expect(clippy::too_many_lines, reason = "This is a simple match statement; there is no other way to cast a glfw::Key to a nanogpu Key")]
+pub const fn glfw_key_to_key(glfw_key: glfw::Key) -> Option<Key> {
     match glfw_key {
         glfw::Key::Space => Some(Key::Space),
         glfw::Key::Apostrophe => Some(Key::Apostrophe),
@@ -106,7 +115,7 @@ pub fn glfw_key_to_key(glfw_key: glfw::Key) -> Option<Key> {
         glfw::Key::Kp7 => Some(Key::Keypad7),
         glfw::Key::Kp8 => Some(Key::Keypad8),
         glfw::Key::Kp9 => Some(Key::Keypad9),
-        glfw::Key::KpDecimal => Some(Key::KeypadDecima),
+        glfw::Key::KpDecimal => Some(Key::KeypadDecimal),
         glfw::Key::KpDivide => Some(Key::KeypadDivide),
         glfw::Key::KpMultiply => Some(Key::KeypadMultiply),
         glfw::Key::KpSubtract => Some(Key::KeypadSubtract),
