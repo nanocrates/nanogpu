@@ -1,0 +1,11 @@
+[package]
+name = "nanogpu_surface"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+nanogpu_window.workspace = true
+nanogpu_render.workspace = true
+
+[lints]
+workspace = true
