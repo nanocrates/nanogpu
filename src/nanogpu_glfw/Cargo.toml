@@ -12,10 +12,12 @@ readme = "README.md"
 [dependencies]
 nanogpu_window.workspace = true
 nanomath.workspace = true
+raw-window-handle = { version = "0.6.2", default-features = false }
 
 [dependencies.glfw]
 version = "0.63.0"
 default-features = false
+features = ["raw-window-handle-v0_6"]
 
 [features]
 x11 = ["glfw/x11"]

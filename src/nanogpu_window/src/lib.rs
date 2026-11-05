@@ -14,6 +14,7 @@ pub mod key;
 pub mod error;
 
 use nanomath::vector::Vec2u;
+use raw_window_handle::{HasDisplayHandle, HasWindowHandle};
 
 use self::event::WindowEvent;
 
@@ -24,7 +25,7 @@ use self::event::WindowEvent;
 ///
 /// > This solves the NxM problem, as any graphics backend can use any windowing library, provided
 /// > it implements this trait.
-pub trait Window: Sized {
+pub trait Window: Sized + HasWindowHandle + HasDisplayHandle {
 
     /// Get the dimensions (size) of the window, as a [`Vec2u`].
     fn get_dimensions(&self) -> &Vec2u;

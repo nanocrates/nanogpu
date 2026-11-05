@@ -19,6 +19,7 @@ use nanomath::vector::Vec2u;
 use nanogpu_window::Window;
 use nanogpu_window::error::WindowCreationError;
 use nanogpu_window::event::{WindowEvent, KeyEvent};
+use raw_window_handle::HasWindowHandle;
 
 /// An implementation of [`Window`] with a GLFW backend (desktop use).
 ///
@@ -110,15 +111,15 @@ impl Window for GlfwWindow {
         self.glfw_window_handle.set_title(&self.title);
     }
 
-    fn events(&mut self) -> impl Iterator<Item = WindowEvent> {                                                                                      
-        self.glfw_handle.poll_events();                                                                                                     
+    fn events(&mut self) -> impl Iterator<Item = WindowEvent> {
+        self.glfw_handle.poll_events();
 
         #[expect(clippy::wildcard_enum_match_arm, reason = "For now, the only GLFW events we care about are listed in the match. If GLFW adds more events in the future, we will ignore them until this function is updated - additions to GLFW must not break this function.")]
         glfw::flush_messages(&self.glfw_event_pump)
-            .filter_map(|(_, event)| match event {                                                               
+            .filter_map(|(_, event)| match event {
                 glfw::WindowEvent::Key(glfw_key, _, glfw_action, _) => convert_key_event(glfw_key, glfw_action),
-                glfw::WindowEvent::Close => Some(WindowEvent::Close),                                                                                         
-                _ => None,                                                                                                           
+                glfw::WindowEvent::Close => Some(WindowEvent::Close),
+                _ => None,
             })
     }
 
@@ -132,6 +133,18 @@ impl Window for GlfwWindow {
 
     fn new_frame(&mut self) {
         self.glfw_window_handle.swap_buffers();
+    }
+}
+
+impl HasWindowHandle for GlfwWindow {
+    fn window_handle(&self) -> Result<raw_window_handle::WindowHandle<'_>, raw_window_handle::HandleError> {
+        self.glfw_window_handle.window_handle()
+    }
+}
+
+impl HasDisplayHandle for GlfwWindow {
+    fn display_handle(&self) -> Result<raw_window_handle::DisplayHandle<'_>, raw_window_handle::HandleError> {
+        self.glfw_window_handle.display_handle()
     }
 }
 

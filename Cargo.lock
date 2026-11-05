@@ -71,6 +71,7 @@ dependencies = [
  "glfw",
  "nanogpu_window",
  "nanomath",
+ "raw-window-handle",
 ]
 
 [[package]]
@@ -78,6 +79,7 @@ name = "nanogpu_window"
 version = "0.1.0"
 dependencies = [
  "nanomath",
+ "raw-window-handle",
 ]
 
 [[package]]
@@ -111,6 +113,12 @@ name = "pkg-config"
 version = "0.3.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548"
+
+[[package]]
+name = "raw-window-handle"
+version = "0.6.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "20675572f6f24e9e76ef639bc5552774ed45f1c30e2951e1e99c59888861c539"
 
 [[package]]
 name = "shlex"

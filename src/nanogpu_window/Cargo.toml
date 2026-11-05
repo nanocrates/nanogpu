@@ -11,6 +11,7 @@ readme = "README.md"
 
 [dependencies]
 nanomath.workspace = true
+raw-window-handle = { version = "0.6.2", default-features = false }
 
 [lints]
 workspace = true
